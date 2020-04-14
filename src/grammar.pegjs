@@ -1,14 +1,23 @@
+{
+  const AST = options.AST
+}
+
 calculator
   = expr
 
 expr
-  = left:factor rest:(addop factor)*
+  = head:factor rest:(addop expr)*
+      {return new AST.BinOp(head,rest)}
+    / factor
 
 factor
-  = left:term rest:(mulop term)*
+  = head:term rest:(mulop term)*
+      {return new AST.BinOp(head,rest)}
+    / term
 
 term
-  = digits:[0-9]
+  = digits:[0-9]+
+  {return new AST.IntegerValue(parseInt(digits.join(""), 10))}
 
 addop
   = "+" / "-"

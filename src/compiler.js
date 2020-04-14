@@ -28,6 +28,6 @@
 
 
 export default function compileAndRun(grammar, script, printFunction) {
-
+  console.log(grammar.parse(script))
   return // ... the value returned by executing the SMURF script
 }

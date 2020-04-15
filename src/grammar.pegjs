@@ -2,7 +2,7 @@
   const AST = options.AST
 }
 
-calculator
+arithmetic_expression
   = expr
 
 expr
@@ -14,16 +14,21 @@ expr
     / factor
 
 factor
-  = head:term rest:(mulop term)*
+  = head:integer rest:(mulop integer)*
       {return rest.reduce(
         (result, [op,right]) => new AST.BinOp(result, op, right),
         head
       )}
-    / term
+    / integer 
 
-term
-  = digits:[0-9]+
-  {return new AST.IntegerValue(parseInt(digits.join(""), 10))}
+
+integer
+  =   ("+"/"-") digits:[0-9]+ 
+      {return new AST.IntegerValue(parseInt(digits.join(""), 10))}
+    / digits:[0-9]+
+      {return new AST.IntegerValue(parseInt(digits.join(""), 10))}
+  
+
 
 addop
   = "+" / "-"

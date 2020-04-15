@@ -7,12 +7,18 @@ calculator
 
 expr
   = head:factor rest:(addop expr)*
-      {return new AST.BinOp(head,rest)}
+      {return rest.reduce(
+        (result, [op,right]) => new AST.BinOp(result, op, right),
+        head
+      )}
     / factor
 
 factor
   = head:term rest:(mulop term)*
-      {return new AST.BinOp(head,rest)}
+      {return rest.reduce(
+        (result, [op,right]) => new AST.BinOp(result, op, right),
+        head
+      )}
     / term
 
 term
@@ -24,4 +30,10 @@ addop
 
 mulop
   = "*" / "/"
+
+space
+  = [ \t\n\r]
+
+_
+  = space*
 

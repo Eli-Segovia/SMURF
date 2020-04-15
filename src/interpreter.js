@@ -4,11 +4,20 @@ export default class interpret{
     }
 
     visitBinOp(target){
-        let head = target.head.accept(this)
-        let rest = target.rest.reduce(
-            (result, [op,_,right]) => new AST.BinOp(result,op,right),
-            head
-        ).accept(this)
+        let result = target.result.accept(this)
+        let right = target.right.accept(this)
+        switch(target.op){
+            case "+":
+                return result + right
+            case "*":
+                return result * right
+            case "/":
+                return result / right
+            case "-":
+                return result - right
+            default:
+                return "error"
+        }
     }
 
     visitIntegerValue(target){

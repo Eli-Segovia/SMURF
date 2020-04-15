@@ -1,8 +1,9 @@
 
 export class BinOp{
-    constructor(head, rest){
-        this.head = head
-        this.rest = rest
+    constructor(result, op, right){
+        this.result = result
+        this.op = op
+        this.right = right
     }
     accept(visitor){
         return visitor.visitBinOp(this)

@@ -1,4 +1,5 @@
 export default class interpret{
+
     visit(target){
         return target.accept(this)
     }
@@ -23,4 +24,5 @@ export default class interpret{
     visitIntegerValue(target){
         return target.value
     }
+    
 }

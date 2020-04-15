@@ -1,5 +1,6 @@
 
 export class BinOp{
+
     constructor(result, op, right){
         this.result = result
         this.op = op
@@ -8,13 +9,16 @@ export class BinOp{
     accept(visitor){
         return visitor.visitBinOp(this)
     }
+    
 }
 
 export class IntegerValue{
+    
     constructor(intVal){
         this.value = intVal
     }
     accept(visitor){
         return visitor.visitIntegerValue(this)
     }
+
 }

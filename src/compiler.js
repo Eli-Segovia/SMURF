@@ -29,8 +29,10 @@ import * as AST from "./AST.js"
 import interpret from "./interpreter.js"
 
 export default function compileAndRun(grammar, script, printFunction) {
+
   let ast         = grammar.parse(script, {AST : AST})
   let interpreter = new interpret()
   let result      = interpreter.visit(ast)
   return printFunction(result)
+  
 }

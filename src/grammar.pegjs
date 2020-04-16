@@ -6,7 +6,7 @@ arithmetic_expression
   = expr
 
 expr
-  = head:factor rest:(addop expr)*
+  = head:factor rest:(addop factor)*
       {return rest.reduce(
         (result, [op,right]) => new AST.BinOp(result, op, right),
         head
@@ -19,15 +19,15 @@ factor
         (result, [op,right]) => new AST.BinOp(result, op, right),
         head
       )}
-    / integer 
+    / integer
 
 
 integer
-  =   ("+"/"-") digits:[0-9]+ 
+  =   "-" digits:[0-9]+
+      {return new AST.IntegerValue(parseInt(-digits.join(""), 10))}
+    / "+"? digits:[0-9]+
       {return new AST.IntegerValue(parseInt(digits.join(""), 10))}
-    / digits:[0-9]+
-      {return new AST.IntegerValue(parseInt(digits.join(""), 10))}
-  
+
 
 addop
   = "+" / "-"
@@ -40,4 +40,3 @@ space
 
 _
   = space*
-

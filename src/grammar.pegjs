@@ -26,17 +26,17 @@ statement
 
 //////////////variables & varialbe decl/////////////
 variable_declaration
-  ="let" __ l:variable_name _ "=" _ r:expr
+  =_ "let" __ l:variable_name _ "=" _ r:expr
   {return new AST.Assignment(l,r)}
-  /"let" __ v:variable_name
+  /_ "let" __ v:variable_name _
   {return new AST.Declaration(v)}
 
 variable_value
-  = id:identifier
+  = _ id:identifier
   {return new AST.VariableValue(id)}
 
 variable_name
-  = id:identifier
+  = _ id:identifier
   {return new AST.VariableName(id)}
 
 

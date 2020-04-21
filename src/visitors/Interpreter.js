@@ -47,5 +47,13 @@ export default class Interpreter {
     if(exprIstrue == 1){return block}
     else{return elseBlock}
   }
+
+  statements(node){
+    let expression;
+    node.expression.forEach(element => {
+      expression = element.accept(this)
+    });
+    return expression
+  }
   
 }

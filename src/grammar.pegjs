@@ -15,24 +15,24 @@ start
 
 // blocks
 code
-  =statement
-  /statement+
+  =statements:statement+
+  {return new AST.Statements(statements)}
 
 statement
-  =expr
+  =exp:expr
 
 
 // if
 if_expression
-  = exp:expr _ block:brace_block _ "else" _ elseBlk:brace_block
+  = _ "if" _ exp:expr _ block:brace_block _ "else" _ elseBlk:brace_block
   {return new AST.ifThenElse(exp, block, elseBlk)}
-  / exp:expr block:brace_block
+  / _"if" exp:expr block:brace_block
   {return new AST.ifThen(exp,block)}
 
 
 //expression
 expr
-  = "if" _ if_expression
+  = if_expression
   / boolean_expression
   / arithmentic_expression
 
@@ -82,7 +82,8 @@ param_list
   ="(" ")"
 
 brace_block
-  = "{" code "}"
+  = "{"_ someCode:code _"}"
+  {return someCode }
 
 
 /////////////////////// utility NTs //////////////////////////////

@@ -41,3 +41,14 @@ export class ifThenElse{
     return visitor.ifThenElse(this)
   }
 }
+
+export class Statements{
+  constructor(newStatements){
+    this.expression = newStatements
+  }
+
+  accept(visitor){
+    return visitor.statements(this)
+  }
+}
+

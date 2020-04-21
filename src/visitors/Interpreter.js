@@ -18,6 +18,11 @@ export default class Interpreter {
   constructor(target, printFunction) {
     this.target = target
     this.printFunction = printFunction
+    this.binding = new Map()
+  }
+
+  setVariable(name, value){
+    this.binding.set(name,value)
   }
 
   visit() {
@@ -54,6 +59,31 @@ export default class Interpreter {
       expression = element.accept(this)
     });
     return expression
+  }
+
+  VariableName(node){
+    return node.name
+  }
+
+  VariableValue(node){
+    return this.getVariable(node.name)
+  }
+
+  getVariable(name){
+    return this.binding.get(name)
+  }
+
+  Declaration(node){
+    let variable = node.variable.accept(this)
+    this.setVariable(variable, 0)
+    return 0
+  }
+
+  Assignment(node){
+    let variable = node.variable.accept(this)
+    let expr     = node.expr.accept(this)
+    this.setVariable(variable,expr)
+    return expr
   }
   
 }

@@ -52,3 +52,46 @@ export class Statements{
   }
 }
 
+export class VariableName{
+  constructor(name){
+    this.name = name
+  }
+
+  accept(visitor){
+    return visitor.VariableName(this)
+  }
+}
+
+export class VariableValue{
+  constructor(name){
+    this.name = name
+  }
+
+  accept(visitor){
+    return visitor.VariableValue(this)
+  }
+}
+
+
+export class Declaration{
+  constructor(l){
+    this.variable = l;
+  }
+  accept(visitor){
+    return visitor.Declaration(this)
+  }
+
+}
+
+export class Assignment{
+
+  constructor(l,r){
+    this.variable = l
+    this.expr     = r
+  }
+
+  accept(visitor){
+    return visitor.Assignment(this)
+  }
+}
+

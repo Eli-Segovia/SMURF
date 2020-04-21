@@ -19,7 +19,26 @@ code
   {return new AST.Statements(statements)}
 
 statement
-  =exp:expr
+  =variable_declaration
+  /expr
+
+
+
+//////////////variables & varialbe decl/////////////
+variable_declaration
+  ="let" __ l:variable_name _ "=" _ r:expr
+  {return new AST.Assignment(l,r)}
+  /"let" __ v:variable_name
+  {return new AST.Declaration(v)}
+
+variable_value
+  = id:identifier
+  {return new AST.VariableValue(id)}
+
+variable_name
+  = id:identifier
+  {return new AST.VariableName(id)}
+
 
 
 // if
@@ -28,6 +47,11 @@ if_expression
   {return new AST.ifThenElse(exp, block, elseBlk)}
   / _"if" exp:expr block:brace_block
   {return new AST.ifThen(exp,block)}
+
+//assignment
+assignment
+  = l:variable_name _"=" _ r:expr
+  {return new AST.Assignment(l,r)}
 
 
 //expression
@@ -54,6 +78,7 @@ mult_term
 
 primary
   = integer
+  / variable_value
   / _ "(" _ expr:arithmentic_expression _ ")" _
     { return expr }
 

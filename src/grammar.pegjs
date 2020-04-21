@@ -20,6 +20,7 @@ code
 
 statement
   =variable_declaration
+  /assignment
   /expr
 
 

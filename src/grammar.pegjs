@@ -49,13 +49,13 @@ if_expression
   / _"if" exp:expr block:brace_block
   {return new AST.ifThen(exp,block)}
 
-//assignment
+///////////////////////////// assignment ///////////////////////////////////////
 assignment
   = l:variable_name _"=" _ r:expr
   {return new AST.Assignment(l,r)}
 
 
-//expression
+////////////////////////////// expression /////////////////////////////////////
 expr
   = function_definition
   / if_expression
@@ -68,7 +68,7 @@ boolean_expression
   = head:arithmentic_expression rest:(relop arithmentic_expression)*
   {return rollupBinOp(head,rest)}
 
-//////////////////////////////// arithmetic expression /////////////////////////////
+/////////////////////////// arithmetic expression //////////////////////////////
 
 arithmentic_expression
   = head:mult_term rest:(addop mult_term)*
@@ -102,12 +102,12 @@ relop
  = _ op:('=='/'!='/'>='/'\>'/'<='/'\<') _
     { return op }
 
-////////////// function call ///////////////////////////////////
+////////////////////// function call ///////////////////////////////////
 function_call
 =_ name:variable_value "(" _ ")"
 {return new AST.FnCall(name,3141592653589)}
 
-//////////////////// function defn /////////
+////////////////////// function defn //////////////////////////////////////////
 
 function_definition
   = "fn" _ params:param_list _ code:brace_block

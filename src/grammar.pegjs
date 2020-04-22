@@ -57,7 +57,8 @@ assignment
 
 //expression
 expr
-  = if_expression
+  = function_definition
+  / if_expression
   / boolean_expression
   / arithmentic_expression
 
@@ -79,6 +80,7 @@ mult_term
 
 primary
   = integer
+  / function_call
   / variable_value
   / _ "(" _ expr:arithmentic_expression _ ")" _
     { return expr }
@@ -100,12 +102,19 @@ relop
  = _ op:('=='/'!='/'>='/'\>'/'<='/'\<') _
     { return op }
 
-
-
+////////////// function call ///////////////////////////////////
+function_call
+=_ name:variable_value "(" _ ")"
+{return new AST.FnCall(name,3141592653589)}
 
 //////////////////// function defn /////////
+
+function_definition
+  = "fn" _ params:param_list _ code:brace_block
+  {return new AST.FnDef(params, code)}
+
 param_list
-  ="(" ")"
+  ="("")"
 
 brace_block
   = "{"_ someCode:code _"}"

@@ -93,5 +93,29 @@ export class Assignment{
   accept(visitor){
     return visitor.Assignment(this)
   }
+
+}
+
+
+export class FnDef{
+  constructor(param, block){
+    this.parameters = param
+    this.code       = block
+  }
+
+  accept(visitor){
+    return visitor.FnDef(this)
+  }
+}
+
+
+export class FnCall{
+  constructor(name,args){
+    this.name  = name
+    this.args  = args
+  }
+  accept(visitor){
+    return visitor.FnCall(this)
+  }
 }
 

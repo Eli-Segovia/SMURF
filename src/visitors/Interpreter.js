@@ -85,5 +85,14 @@ export default class Interpreter {
     this.setVariable(variable,expr)
     return expr
   }
+
+  FnDef(node){
+    return node.code
+  }
+
+  FnCall(node){
+    let bodyAst = node.name.accept(this)
+    return bodyAst.accept(this)
+  }
   
 }

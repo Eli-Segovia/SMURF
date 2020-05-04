@@ -1,13 +1,17 @@
+# Week 3
+
+Nothing to grade
+
 
 # Week 2
 
 | Part           | Comments    | Points |
-|----------------|-------------|--------|
-| provided tests | All passed  |     63 |
+|----------tests | All passed  |     63 |
 | extras         | 3 failures  |      4 |
 | Coding         |             |     22 |
 | **TOTAL**      |             |     89 |
-
+------|-------------|--------|
+| provided
 
 Code issues:
 
